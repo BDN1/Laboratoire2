@@ -190,41 +190,20 @@ class Repository {
             }
             // todo sort
             for (let skey of sortKeys) {
-                let finis = false
+                filteredAndSortedObjects.sort(function (obj1,obj2){
 
-                do {
-                    let fieldIndex = 0;
-                    for (let x = 0; x < filteredAndSortedObjects.length - 1; ++x) {
-                        let obj1 = filteredAndSortedObjects[x];
-                        let obj2 = filteredAndSortedObjects[x + 1];
-
-                        this.Sort(obj1,obj2,skey,filteredAndSortedObjects,fieldIndex,x);
-                        }
-                        (fieldIndex == 0 ? finis = true : finis = false)
-                        
-                    }while(!finis)
-
-                }
+                    if(obj1[skey.key] < obj2[skey.key]){
+                        return skey.asc ? -1 : 1;
+                    }
+                    if(obj1[skey.key] < obj2[skey.key]){
+                        return skey.asc ? 1 : -1;
+                    }
+                });
                 return filteredAndSortedObjects;
             }
             return objectsList;
         }
-        Sort(obj1,obj2,skey,filteredAndSortedObjects,fieldIndex,x){
-            if (skey.asc) {
-                if (this.innerCompare(obj1[skey.key], obj2[skey.key]) > 0) {
-                    filteredAndSortedObjects[x] = obj2;
-                    filteredAndSortedObjects[x + 1] = obj1;
-                    ++fieldIndex;
-                }
-            }
-                else {
-                    if (this.innerCompare(obj1[skey.key], obj2[skey.key]) < 0) {
-                        filteredAndSortedObjects[x] = obj2;
-                        filteredAndSortedObjects[x + 1] = obj1;
-                        ++fieldIndex;
-                    }
-                }
-        }
+    }
         get(id) {
             for (let object of this.objects()) {
                 if (object.Id === id) {
