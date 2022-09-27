@@ -190,12 +190,12 @@ class Repository {
             }
             // todo sort
             for (let skey of sortKeys) {
-                filteredAndSortedObjects.sort(function (obj1,obj2){
-
-                    if(obj1[skey.key] < obj2[skey.key]){
+                filteredAndSortedObjects.sort(function(obj1, obj2) {
+            
+                    if (obj1[skey.key] < obj2[skey.key]) {
                         return skey.asc ? -1 : 1;
                     }
-                    if(obj1[skey.key] < obj2[skey.key]){
+                    if (obj1[skey.key] < obj2[skey.key]) {
                         return skey.asc ? 1 : -1;
                     }
                 });
